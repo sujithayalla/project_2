@@ -34,10 +34,10 @@ private JobDao jobDao;
 		System.out.println("SESSION ID IN addJob()" + session.getId());
 		System.out.println("Session Attribute email in addJob()" + session.getAttribute("email"));
 		if(email==null){
-			ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
-			return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
+		ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
 		}
-		
+	
 		//User is authenticated, check for authorization
 		User user=userDao.getUser(email);
 		if(!user.getRole().equals("ADMIN")){

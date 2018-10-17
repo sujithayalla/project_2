@@ -23,11 +23,11 @@ app.run(function($cookieStore,$rootScope,UserService,$location){
 			  $cookieStore.remove('loggedInUser')
 			  $location.path('/login')
 		  },function(response){
-			  delete $rootScope.user
+			 delete $rootScope.user
 			  $cookieStore.remove('loggedInUser')
-			  if(response.status==401)//UNAUTHORIZED
-				  $location.path('/login')
+			 if(response.status==401)//UNAUTHORIZED
+				 $location.path('/login')
 		  })
 		}
 	
-})
+ })
