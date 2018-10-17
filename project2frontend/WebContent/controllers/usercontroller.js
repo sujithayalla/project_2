@@ -24,18 +24,4 @@ app.controller('UserCtrl',function($scope,UserService,$location,$rootScope){
 				})
 	}
 	
-	
-	$rootScope.logout=function(){//function is called from index.html
-	  alert('logout function is called')
-	  UserService.logout().then(function(response){
-		  delete $rootScope.user
-		  $location.path('/login')
-	  },function(response){
-		  delete $rootScope.user
-		  if(response.status==401)//UNAUTHORIZED
-			  $location.path('/login')
-	  })
-	}
-	
-	
 })
