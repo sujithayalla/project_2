@@ -24,7 +24,7 @@ private SessionFactory sessionFactory;
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from Job");//HQL -> SQL 
 		//HQL - from Job
-		//SQL - select * from job_s190038
+		//SQL - select * from job_table
 		List<Job> jobs=query.list();
 		return jobs;
 		

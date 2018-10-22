@@ -5,13 +5,15 @@ var app=angular.module("app",['ngRoute','ngCookies'])
 
 app.config(function($routeProvider){
 	$routeProvider
-	.when('/registration',{controller:'UserCtrl',templateUrl:'views/registration.html'})
+	.when('/registration',{controller:'UserCtrl',templateUrl:'views/registrationform.html'})
 	.when('/login',{controller:'UserCtrl',templateUrl:'views/login.html'})
 	.when('/home',{templateUrl:'views/home.html'})
 	.when('/addjob',{controller:'JobCtrl',templateUrl:'views/jobform.html'})
 	.when('/getalljobs',{controller:'JobCtrl',templateUrl:'views/jobs.html'})//$scope.jobs
+	.when('/addblog',{controller:'BlogCtrl',templateUrl:'views/blogform.html'})
 	.otherwise({templateUrl:'views/home.html'})
 })
+
 app.run(function($cookieStore,$rootScope,UserService,$location){
 	if($rootScope.user==undefined)
 		$rootScope.user=$cookieStore.get('loggedInUser')//add user variable to the newly created $rootScope object
@@ -23,11 +25,13 @@ app.run(function($cookieStore,$rootScope,UserService,$location){
 			  $cookieStore.remove('loggedInUser')
 			  $location.path('/login')
 		  },function(response){
-			 delete $rootScope.user
+			  delete $rootScope.user
 			  $cookieStore.remove('loggedInUser')
-			 if(response.status==401)//UNAUTHORIZED
-				 $location.path('/login')
+			  if(response.status==401)//UNAUTHORIZED
+				  $location.path('/login')
 		  })
 		}
 	
- })
+			
+		
+})
