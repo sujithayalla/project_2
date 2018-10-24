@@ -40,12 +40,15 @@
                      <li ng-show="user.email==undefined"><a href="#/login">Login</a></li>
                      <li ng-show="user.role=='ADMIN'"><a href="#/addjob">Add Job</a></li>
                      <li ng-show="user.email!=undefined"><a href="#/getalljobs" >Get All Jobs</a></li>
-                    
-                     <li class="dropdown"ng-show="user.email!=undefined"><a href="#" class="dropdown-toggle"
+                     
+                     <li class="dropdown" ng-show="user.email!=undefined"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Blog<span class="caret"></span></a>
 					
 				<ul class="dropdown-menu">
-				<li> <a href="#/addblog">Add Blog</a> </li>
+				<li > <a href="#/addblog">Add Blog</a> </li>
+				<!-- if routeparams value is 1, only then it will execute the statement BlogService.getBlogsWaitingForApproval() -->
+				<li ng-show="user.role=='ADMIN'"><a href="#/blogsWaitingForApproval/1">Blogs Waiting For approval</a></li>
+				<li><a href="#/blogsApproved/2">Blogs Approved</a></li>
 				</ul>
 			   </li>
                      
@@ -72,4 +75,6 @@
 <script type="text/javascript" src="services/jobservice.js"></script>
 <script type="text/javascript" src="controllers/blogcontroller.js"></script>
 <script type="text/javascript" src="services/blogservice.js"></script>
+<script type="text/javascript" src="controllers/blogindetailcontroller.js"></script>
 </html>
+

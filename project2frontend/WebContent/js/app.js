@@ -11,6 +11,10 @@ app.config(function($routeProvider){
 	.when('/addjob',{controller:'JobCtrl',templateUrl:'views/jobform.html'})
 	.when('/getalljobs',{controller:'JobCtrl',templateUrl:'views/jobs.html'})//$scope.jobs
 	.when('/addblog',{controller:'BlogCtrl',templateUrl:'views/blogform.html'})
+	.when('/blogsWaitingForApproval/:id',{controller:'BlogCtrl',templateUrl:'views/blogsWaitingForApproval.html'})
+	.when('/blogsApproved/:id',{controller:'BlogCtrl',templateUrl:'views/blogsApproved.html'})
+	.when('/getBlogApprovalForm/:id',{controller:'BlogInDetailCtrl',templateUrl:'views/blogApprovalForm.html'})
+	.when('/getBlogApproved/:id',{controller:'BlogInDetailCtrl',templateUrl:'views/blogdetails.html'})
 	.otherwise({templateUrl:'views/home.html'})
 })
 

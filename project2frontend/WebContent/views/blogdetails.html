@@ -1,0 +1,19 @@
+<div class="container">
+<div class="panel panel-info">
+<div class="panel-heading">
+<b>Blog Title </b> {{blogPost.blogTitle}}<br>
+<b>Posted On </b>{{blogPost.postedOn | date :'dd-MM-yyyy'}}<br>
+<b>Posted By </b>{{blogPost.postedBy.firstname}} &nbsp; {{blogPost.postedBy.lastname}}<br>
+<b>Email </b>{{blogPost.postedBy.email}}<br>
+</div>
+<div class="panel-body">
+<b>BlogContent </b>{{blogPost.blogContent}}<br>
+likes {{blogPost.likes}}<br>
+<a><span class="glyphicon glyphicon-thumbs-up"></span></a><br>
+<textarea rows="5" cols="50"></textarea><br>
+<button class="btn btn-info">POST COMMENT</button>
+</div>
+</div>
+</div>
+
+
