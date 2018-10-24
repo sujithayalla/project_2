@@ -19,6 +19,12 @@ app.factory('BlogService',function($http){
 	blogService.getBlog=function(blogPostId){
 		return $http.get("http://localhost:9090/project2middleware/getBlog/"+blogPostId)
 	}
+	blogService.approve=function(blogPost){
+		return $http.put("http://localhost:9090/project2middleware/approve",blogPost)
+	}
+	blogService.reject=function(blogPost){
+		return $http.put("http://localhost:9090/project2middleware/reject",blogPost)
+	}
 	
 	return blogService;
 })

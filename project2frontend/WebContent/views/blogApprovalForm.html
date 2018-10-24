@@ -9,7 +9,10 @@
 </div>
 <div class="panel-body">
 <b>BlogContent </b>{{blogPost.blogContent}}<br>
-<button class="btn btn-info">Approve</button> &nbsp; <button class="btn btn-danger">Reject</button>
+<button class="btn btn-info"  ng-click="approve(blogpost)">Approve</button> &nbsp;
+ <button class="btn btn-danger"  ng-click="reject(blogpost)">Reject</button>
+<!--- approving-update blogpost set approved=1 where id=?-->
+<!-- Reject- delete from blogpost where id=? -->
 </div>
 </div>
 </div>

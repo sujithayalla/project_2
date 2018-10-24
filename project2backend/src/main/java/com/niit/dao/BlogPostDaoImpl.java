@@ -35,6 +35,19 @@ private SessionFactory sessionFactory;
 		BlogPost blogPost=(BlogPost)session.get(BlogPost.class, blogPostId);
 		return blogPost;
 	}
+	public void updateBlogPost(BlogPost blogPost) {
+		Session session=sessionFactory.getCurrentSession();
+		session.update(blogPost);		
+	}
+
+	public void deleteeBlogPost(BlogPost blogPost) {
+		Session session=sessionFactory.getCurrentSession();
+		session.delete(blogPost);		
+	}
+	public void deleteBlogPost(BlogPost blogPost) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 
