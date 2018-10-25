@@ -105,6 +105,61 @@ public ResponseEntity<?> getBlog(@PathVariable int blogPostId,HttpSession sessio
 	
 }
 
+@RequestMapping(value="/approve",method=RequestMethod.PUT)
+public ResponseEntity<?> approveBlogPost(@RequestBody BlogPost blogPost,HttpSession session, ErrorClazz errorClazz){
+String email=(String)session.getAttribute("email");
+	
+	//CHECK FOR AUTHENTICATION
+	if(email==null){
+		ErrorClazz errorClazz1=new ErrorClazz(5,"Unauthorized access.. please login");
+		return new ResponseEntity<ErrorClazz>(errorClazz1,HttpStatus.UNAUTHORIZED);//login.html
+	}
+	
+	//CHECK FOR AUTHORIZATION - 
+	User user=userDao.getUser(email);
+	if(!user.getRole().equals("ADMIN")){//Logged in user is not an admin
+		ErrorClazz errorClazz1=new ErrorClazz(6,"Access denied...");
+		return new ResponseEntity<ErrorClazz>(errorClazz1,HttpStatus.UNAUTHORIZED);
+		//blogsWaitingForApproval.html -> Access Denied
+	}
+	blogPost.setApproved(true);
+	try {
+	blogPostDao.updateBlogPost(blogPost);
+	return new ResponseEntity<Void>(HttpStatus.OK);
+	}catch(Exception e) {
+		ErrorClazz errorClazz1=new ErrorClazz(7,"Unable to approve the blogpost" +e.getMessage());
+		return new ResponseEntity<ErrorClazz>(errorClazz1,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+}
+@RequestMapping(value="/reject",method=RequestMethod.PUT)
+public ResponseEntity<?> rejectBlogPost(@RequestBody BlogPost blogPost,HttpSession session){
+String email=(String)session.getAttribute("email");
+	
+	//CHECK FOR AUTHENTICATION
+	if(email==null){
+		ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);//login.html
+	}
+	
+	//CHECK FOR AUTHORIZATION - Only admin can view list of blogs waiting for approval
+	User user=userDao.getUser(email);
+	if(!user.getRole().equals("ADMIN")){//Logged in user is not an admin
+		ErrorClazz errorClazz=new ErrorClazz(6,"Access denied...");
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
+		//blogsWaitingForApproval.html -> Access Denied
+	}
+	blogPost.setApproved(true);
+	try {
+	blogPostDao.deleteBlogPost(blogPost);
+	return new ResponseEntity<Void>(HttpStatus.OK);
+	}catch(Exception e) {
+		ErrorClazz errorClazz=new ErrorClazz(7,"Unable to delete the blogpost" +e.getMessage());
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+}
+
+
 }
 
 

@@ -3,7 +3,7 @@
  * /getBlogApprovalForm/:id
  * /getBlogApprovalForm/101
  */
-app.controller('BlogInDetailCtrl',function($scope,BlogService,$location,$rootScope,$routeParams){
+app.controller('BlogInDetailCtrl',function($scope,BlogService,$location,$rootScope,$routeParams,$sce){
 	var blogPostId=$routeParams.id //this gives the id of the blog post
 	
 	if(blogPostId!=undefined){
@@ -12,6 +12,7 @@ app.controller('BlogInDetailCtrl',function($scope,BlogService,$location,$rootSco
 			//get the details shows that particular blogpost
 			
 			$scope.blogPost=response.data
+			$scope.content=$sce.trustAsHtml($scope.blogPost.blogContent)
 		},function(response){
 			$scope.blogPost=response.data
 			if(response.ststus==401 && response.data.errorCode==5)

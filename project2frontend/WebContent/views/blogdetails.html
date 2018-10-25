@@ -7,7 +7,9 @@
 <b>Email </b>{{blogPost.postedBy.email}}<br>
 </div>
 <div class="panel-body">
-<b>BlogContent </b>{{blogPost.blogContent}}<br>
+<div></div>
+<p ng-bind-html="Content">
+</div>
 likes {{blogPost.likes}}<br>
 <a><span class="glyphicon glyphicon-thumbs-up"></span></a><br>
 <textarea rows="5" cols="50"></textarea><br>
