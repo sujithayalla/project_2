@@ -1,5 +1,7 @@
 package com.niit.dao;
 
-public interface NotificationDao {
+import com.niit.model.Notification;
 
+public interface NotificationDao {
+void addNotification(Notification notification);
 }

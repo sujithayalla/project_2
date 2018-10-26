@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.niit.dao.BlogPostDao;
+import com.niit.dao.NotificationDao;
 import com.niit.dao.UserDao;
 import com.niit.model.BlogPost;
 import com.niit.model.ErrorClazz;
+import com.niit.model.Notification;
 import com.niit.model.User;
 
 @Controller
@@ -26,6 +28,8 @@ public class BlogPostController {
 private BlogPostDao blogPostDao;
 	@Autowired
 private UserDao userDao;
+	@Autowired
+private NotificationDao notificationDao;
 @RequestMapping(value="/addblogpost",method=RequestMethod.POST)	
 public ResponseEntity<?> addBlogPost(@RequestBody BlogPost blogPost,HttpSession session){
 	//CHECK FOR AUTHENTICATION
@@ -99,36 +103,40 @@ public ResponseEntity<?> getBlog(@PathVariable int blogPostId,HttpSession sessio
 			return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
 			//blogsWaitingForApproval.html -> Access Denied
 		}
-		
+	
 	}
 		return new ResponseEntity<BlogPost>(blogPost,HttpStatus.OK);
 	
 }
 
 @RequestMapping(value="/approve",method=RequestMethod.PUT)
-public ResponseEntity<?> approveBlogPost(@RequestBody BlogPost blogPost,HttpSession session, ErrorClazz errorClazz){
+public ResponseEntity<?> approveBlogPost(@RequestBody BlogPost blogPost,HttpSession session){
 String email=(String)session.getAttribute("email");
 	
 	//CHECK FOR AUTHENTICATION
 	if(email==null){
-		ErrorClazz errorClazz1=new ErrorClazz(5,"Unauthorized access.. please login");
-		return new ResponseEntity<ErrorClazz>(errorClazz1,HttpStatus.UNAUTHORIZED);//login.html
+	 ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);//login.html
 	}
 	
 	//CHECK FOR AUTHORIZATION - 
 	User user=userDao.getUser(email);
 	if(!user.getRole().equals("ADMIN")){//Logged in user is not an admin
-		ErrorClazz errorClazz1=new ErrorClazz(6,"Access denied...");
-		return new ResponseEntity<ErrorClazz>(errorClazz1,HttpStatus.UNAUTHORIZED);
+		ErrorClazz errorClazz=new ErrorClazz(6,"Access denied...");
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
 		//blogsWaitingForApproval.html -> Access Denied
 	}
 	blogPost.setApproved(true);
 	try {
 	blogPostDao.updateBlogPost(blogPost);
+	Notification notification=new Notification();
+	notification.setApprovalStatus("Approved");
+	notification.setBlogTitle(blogPost.getBlogTitle());
+	notification.setUserToBeNotified(blogPost.getPostedBy()); //blogpost postedBy //BlogPost.UserEmail
 	return new ResponseEntity<Void>(HttpStatus.OK);
 	}catch(Exception e) {
-		ErrorClazz errorClazz1=new ErrorClazz(7,"Unable to approve the blogpost" +e.getMessage());
-		return new ResponseEntity<ErrorClazz>(errorClazz1,HttpStatus.INTERNAL_SERVER_ERROR);
+		ErrorClazz errorClazz=new ErrorClazz(7,"Unable to approve the blogpost" +e.getMessage());
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
 @RequestMapping(value="/reject",method=RequestMethod.PUT)
@@ -150,6 +158,12 @@ String email=(String)session.getAttribute("email");
 	}
 	blogPost.setApproved(true);
 	try {
+		Notification notification=new Notification();
+		notification.setApprovalStatus("Rejected");
+		notification.setBlogTitle(blogPost.getBlogTitle());
+		notification.setRejection("");
+		notification.setUserToBeNotified(blogPost.getPostedBy());
+		notificationDao.addNotification(notification);
 	blogPostDao.deleteBlogPost(blogPost);
 	return new ResponseEntity<Void>(HttpStatus.OK);
 	}catch(Exception e) {
