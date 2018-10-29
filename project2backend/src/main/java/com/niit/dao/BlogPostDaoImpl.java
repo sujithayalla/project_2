@@ -40,15 +40,12 @@ private SessionFactory sessionFactory;
 		session.update(blogPost);		
 	}
 
-	public void deleteeBlogPost(BlogPost blogPost) {
-		Session session=sessionFactory.getCurrentSession();
-		session.delete(blogPost);		
-	}
 	public void deleteBlogPost(BlogPost blogPost) {
-		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		session.delete(blogPost);
 		
 	}
-
+	
 }
 
 

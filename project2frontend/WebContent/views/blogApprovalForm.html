@@ -8,11 +8,13 @@
 <b>Email </b>{{blogPost.postedBy.email}}<br>
 </div>
 <div class="panel-body">
-<p ng-bind-html="Content"><br>
-<button class="btn btn-info"  ng-click="approve(blogpost)">Approve</button> &nbsp;
+<p ng-bind-html="content"><br>
+<div>
+<button class="btn btn-info"   ng-click="approve(blogpost)">Approve</button> 
  <button class="btn btn-danger"  ng-click="reject(blogpost)">Reject</button>
 <!--- approving-update blogpost set approved=1 where id=?-->
 <!-- Reject- delete from blogpost where id=? -->
+</div>
 </div>
 </div>
 </div>

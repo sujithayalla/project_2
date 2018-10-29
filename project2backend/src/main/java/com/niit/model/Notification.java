@@ -14,22 +14,23 @@ public class Notification {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 private int id;
 	@ManyToOne
-private User userToBeNotified;
-private String approvalStatus;
+private User userToBeNotified;//FK constraint
+private String approvalStatus;//either Approved or Rejected
 private String blogTitle;
-private String rejection;
-public User getUserToBeNotified() {
-	return userToBeNotified;
-}
-public void setUserToBeNotified(User userToBeNotified) {
-	this.userToBeNotified = userToBeNotified;
-}
-private boolean views;
+private String rejectionReason;
+private boolean viewed;
 public int getId() {
 	return id;
 }
 public void setId(int id) {
 	this.id = id;
+}
+
+public User getUserToBeNotified() {
+	return userToBeNotified;
+}
+public void setUserToBeNotified(User email) {
+	this.userToBeNotified = email;
 }
 public String getApprovalStatus() {
 	return approvalStatus;
@@ -43,17 +44,17 @@ public String getBlogTitle() {
 public void setBlogTitle(String blogTitle) {
 	this.blogTitle = blogTitle;
 }
-public String getRejection() {
-	return rejection;
+public String getRejectionReason() {
+	return rejectionReason;
 }
-public void setRejection(String rejection) {
-	this.rejection = rejection;
+public void setRejectionReason(String rejectionReason) {
+	this.rejectionReason = rejectionReason;
 }
-public boolean isViews() {
-	return views;
+public boolean isViewed() {
+	return viewed;
 }
-public void setViews(boolean views) {
-	this.views = views;
+public void setViewed(boolean viewed) {
+	this.viewed = viewed;
 }
 
 }
