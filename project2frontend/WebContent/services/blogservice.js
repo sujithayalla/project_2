@@ -22,8 +22,8 @@ app.factory('BlogService',function($http){
 	blogService.approve=function(blogPost){
 		return $http.put("http://localhost:9090/project2middleware/approve",blogPost)
 	}
-	blogService.reject=function(blogPost){
-		return $http.put("http://localhost:9090/project2middleware/reject",blogPost)
+	blogService.reject=function(blogPost,rejectionReason){
+		return $http.put("http://localhost:9090/project2middleware/reject/"+rejectionReason,blogPost)
 	}
 	
 	return blogService;

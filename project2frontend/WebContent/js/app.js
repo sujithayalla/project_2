@@ -7,7 +7,7 @@ app.config(function($routeProvider){
 	$routeProvider
 	.when('/registration',{controller:'UserCtrl',templateUrl:'views/registrationform.html'})
 	.when('/login',{controller:'UserCtrl',templateUrl:'views/login.html'})
-	.when('/home',{templateUrl:'views/home.html'})
+	.when('/home',{controller:'NotificationCtrl',templateUrl:'views/home.html'})
 	.when('/addjob',{controller:'JobCtrl',templateUrl:'views/jobform.html'})
 	.when('/getalljobs',{controller:'JobCtrl',templateUrl:'views/jobs.html'})//$scope.jobs
 	.when('/addblog',{controller:'BlogCtrl',templateUrl:'views/blogform.html'})
@@ -15,6 +15,7 @@ app.config(function($routeProvider){
 	.when('/blogsApproved/:id',{controller:'BlogCtrl',templateUrl:'views/blogsApproved.html'})
 	.when('/getBlogApprovalForm/:id',{controller:'BlogInDetailCtrl',templateUrl:'views/blogApprovalForm.html'})
 	.when('/getBlogApproved/:id',{controller:'BlogInDetailCtrl',templateUrl:'views/blogdetails.html'})
+	.when('/getnotification/:id',{controller:'NotificationCtrl',templateUrl:'views/notificationdetails.html'})
 	.otherwise({templateUrl:'views/home.html'})
 })
 
