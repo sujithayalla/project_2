@@ -19,12 +19,34 @@ app.factory('BlogService',function($http){
 	blogService.getBlog=function(blogPostId){
 		return $http.get("http://localhost:9090/project2middleware/getBlog/"+blogPostId)
 	}
-	blogService.approve=function(blogPost){
-		return $http.put("http://localhost:9090/project2middleware/approve",blogPost)
-	}
+	
+    blogService.approve=function(blogPost){
+    	return $http.put("http://localhost:9090/project2middleware/approve",blogPost)
+    }	
+	
 	blogService.reject=function(blogPost,rejectionReason){
 		return $http.put("http://localhost:9090/project2middleware/reject/"+rejectionReason,blogPost)
 	}
 	
+	blogService.hasUserLikedBlogPost=function(blogPostId){
+		return $http.get("http://localhost:9090/project2middleware/hasUserLikedBlogPost/"+blogPostId);
+	}
+	
+	blogService.updateLikes=function(blogPostId){
+		return $http.put("http://localhost:9090/project2middleware/updatelikes/"+blogPostId);
+	}
+	
+	blogService.addBlogComment=function(blogComment){
+		//newly created blogcomment object with the values for two properties - blogPost, commentTxt
+		//blogComment {'blogPost':{},'commentTxt':'Thanks'}
+		return $http.post("http://localhost:9090/project2middleware/addblogcomment",blogComment)
+	}
+	
+	blogService.getAllBlogComments=function(blogPostId){
+	return $http.get("http://localhost:9090/project2middleware/getblogcomments/"+blogPostId)	
+	}
+	
 	return blogService;
 })
+
+
