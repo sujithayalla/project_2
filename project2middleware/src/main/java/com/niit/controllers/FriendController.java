@@ -26,12 +26,11 @@ private FriendDao friendDao;
 private UserDao userDao;
 	@RequestMapping(value="/suggestedusers",method=RequestMethod.GET)
 public ResponseEntity<?> getAllSuggestedUsers(HttpSession session){
-//	String email=(String)session.getAttribute("email");
-	//if(email==null){
-//	ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
-//	return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
-	//}
-	String email="bunny.hy@abc.com";
+	String email=(String)session.getAttribute("email");
+	if(email==null){
+		ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
+		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
+	}
 	List<User> suggestedUsers=friendDao.getAllSuggestedUsers(email);
 	return new ResponseEntity<List<User>>(suggestedUsers,HttpStatus.OK);
 }
