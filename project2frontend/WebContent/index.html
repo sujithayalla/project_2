@@ -71,16 +71,16 @@
        <li class="dropdown" ng-show="user.email!=undefined"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Friend<span class="caret"></span></a>
 					
-				<ul class="dropdown-menu">
+					<ul class="dropdown-menu">
 				<li > <a href="#/suggestedusers">Suggested Users</a> </li>
 				<li > <a href="#/pendingrequests">Pending Requests</a> </li>
 				<li > <a href="#/friendslist">Friends List</a> </li>
 				</ul>
 				</li>
-      
-      				<li ng-show="user.email!=undefined"><a href="#/uploadprofilepic"><img src="http://localhost:9090/project2middleware/getimage?email={{user.email}}" alt="profilpic" height="40px" width="40px"></a></li>
-                     
-                     <li ng-show="user.email!=undefined"><a href="">Welcome {{user.firstname}}&nbsp;{{user.lastname}}</a></li>
+				
+     				<li ng-show="user.email!=undefined"><a href="#/uploadprofilepic"><img src="http://localhost:9090/project2middleware/getimage?email={{user.email}}" alt="profilpic" height="40px" width="40px"></a></li>
+     				
+                      <li ng-show="user.email!=undefined"><a href="">Welcome {{user.firstname}}&nbsp;{{user.lastname}}</a></li>
                      <li ng-show="user.email!=undefined"><a href="" ng-click="logout()">logout</a></li>
 				</ul>
 			</div>

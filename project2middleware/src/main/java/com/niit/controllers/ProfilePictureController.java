@@ -47,11 +47,14 @@ public ResponseEntity<?> saveOrUpdateProfilePicture(
 		String auth=(String)session.getAttribute("email");
 		if(auth==null)
 			return null;//src attribute will get null value, no image
+		System.out.println(email);
 		ProfilePicture profilePicture=profilePictureDao.getImage(email);
 		if(profilePicture==null)
 			return null;
 		else
+			System.out.println("Image is "  + profilePicture.getImage() + " " + email);
 		return profilePicture.getImage();//this data will be return to src attribute of img tag
 		
 	}
 }
+

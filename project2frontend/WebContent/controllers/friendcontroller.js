@@ -74,3 +74,6 @@ app.controller('FriendCtrl',function($scope,$location,FriendService){
 	})
 	
 })
+
+
+
