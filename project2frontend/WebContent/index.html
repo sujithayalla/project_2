@@ -77,10 +77,15 @@
 				<li > <a href="#/friendslist">Friends List</a> </li>
 				</ul>
 				</li>
-				
-     				<li ng-show="user.email!=undefined"><a href="#/uploadprofilepic"><img src="http://localhost:9090/project2middleware/getimage?email={{user.email}}" alt="profilpic" height="40px" width="40px"></a></li>
-     				
-                      <li ng-show="user.email!=undefined"><a href="">Welcome {{user.firstname}}&nbsp;{{user.lastname}}</a></li>
+			         
+	
+       			<li ng-show="user.email!=undefined"><a href="#/uploadprofilepic">
+	<img src="http://localhost:9090/project2middleware/getimage?email={{user.email}}"  alt="profilpic" height="40px" width="40px"/></a></li>	
+       				
+       				
+       				<li><a href="#/chat" ng-show="user.firstname">chat </a></li>
+       
+     			  <li ng-show="user.email!=undefined"><a href="">Welcome {{user.firstname}}&nbsp;{{user.lastname}}</a></li>
                      <li ng-show="user.email!=undefined"><a href="" ng-click="logout()">logout</a></li>
 				</ul>
 			</div>
@@ -114,4 +119,10 @@
 
 <script type="text/javascript" src="services/friendservice.js"></script>
 <script type="text/javascript" src="controllers/friendcontroller.js"></script>
+
+<script type="text/javascript" src="services/chatservice.js"></script>
+<script type="text/javascript" src="controllers/chatcontroller.js"></script>
+
+<script type="text/javascript" src="js/sockjs/sockjs.min.js"></script>
+<script type="text/javascript" src="js/stomp/dist/stomp.min.js"></script>
 </html>
