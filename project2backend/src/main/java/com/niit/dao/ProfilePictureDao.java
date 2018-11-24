@@ -6,5 +6,3 @@ public interface ProfilePictureDao {
 ProfilePicture  saveOrUpdateProfilePic(ProfilePicture profilePicture);
 ProfilePicture  getImage(String email);
 }
-
-

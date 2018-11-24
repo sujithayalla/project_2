@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.niit.dao.ProfilePictureDao;
 import com.niit.model.ErrorClazz;
@@ -22,7 +23,9 @@ public class ProfilePictureController {
 	@Autowired
 private ProfilePictureDao profilePictureDao;
 	@RequestMapping(value="/uploadprofilepic",method=RequestMethod.POST)
-public ResponseEntity<?> saveOrUpdateProfilePicture(@RequestParam CommonsMultipartFile image,HttpSession session){
+public ResponseEntity<?> saveOrUpdateProfilePicture(
+		@RequestParam CommonsMultipartFile image,
+		HttpSession session){
 	String email=(String)session.getAttribute("email");
 	if(email==null){
 		ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
@@ -45,14 +48,11 @@ public ResponseEntity<?> saveOrUpdateProfilePicture(@RequestParam CommonsMultipa
 		String auth=(String)session.getAttribute("email");
 		if(auth==null)
 			return null;//src attribute will get null value, no image
-		System.out.println(email);
 		ProfilePicture profilePicture=profilePictureDao.getImage(email);
 		if(profilePicture==null)
 			return null;
 		else
-			System.out.println("Image is "  + profilePicture.getImage() + " " + email);
 		return profilePicture.getImage();//this data will be return to src attribute of img tag
 		
 	}
 }
-

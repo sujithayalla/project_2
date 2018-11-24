@@ -20,7 +20,8 @@ app.config(function($routeProvider){
 	.when('/pendingrequests',{controller:'FriendCtrl',templateUrl:'views/pendingrequests.html'})
 	.when('/listoffriends',{controller:'FriendCtrl',templateUrl:'views/friendslist.html'})
 	.when('/uploadprofilepic',{templateUrl:'views/uploadprofilepic.html'})
-	.when('/chat',{templateUrl:'views/chat.html',controller:'ChatCtrl'})
+	.when('/chat',{controller:'ChatCtrl',templateUrl:'views/chat.html'})
+
 	.otherwise({templateUrl:'views/home.html'})
 })
 

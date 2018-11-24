@@ -20,7 +20,7 @@ import com.niit.model.BlogComment;
 import com.niit.model.BlogPost;
 import com.niit.model.BlogPostLikes;
 import com.niit.model.Friend;
-import com.niit.model.ProfilePicture;
+
 
 @Configuration
 @EnableTransactionManagement
