@@ -1,4 +1,6 @@
-//This filter is used to display chat messages in reverse order ie from last index to 0 , latest message first
+/**
+ * 
+ */
 app.filter('reverse', function() {
 	  return function(items) {
 	    return items.slice().reverse();
