@@ -58,10 +58,10 @@ public ResponseEntity<?> pendingRequests(HttpSession session){
 	String email=(String)session.getAttribute("email");
 	//Get the email of the logged in user
 	if(email==null){
-		ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
+	ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
 		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
 	}
-
+	//String email="sunny.s@niit.com";
 	List<Friend> pendingRequests=friendDao.getPendingRequests(email);
 	return new ResponseEntity<List<Friend>>(pendingRequests,HttpStatus.OK);
 }
@@ -73,6 +73,7 @@ public ResponseEntity<?> acceptRequest(@RequestBody Friend friendRequest,HttpSes
 		ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
 		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
 	}
+	//String email="jhon.kim@niit.com";
 	friendDao.acceptRequest(friendRequest);
 	return new ResponseEntity<Void>(HttpStatus.OK);
 	
@@ -96,6 +97,7 @@ public ResponseEntity<?> listOfFriends(HttpSession session){
 		ErrorClazz errorClazz=new ErrorClazz(5,"Unauthorized access.. please login");
 		return new ResponseEntity<ErrorClazz>(errorClazz,HttpStatus.UNAUTHORIZED);
 	}
+	//String email="sunny.s@niit.com";
 	List<User> friends=friendDao.listOfFriends(email);
 	return new ResponseEntity<List<User>>(friends,HttpStatus.OK);
 }
