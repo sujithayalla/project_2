@@ -19,6 +19,7 @@ import com.niit.model.Notification;
 @Controller
 public class NotificationController {
 	@Autowired
+
 private NotificationDao notificationDao;
 @RequestMapping(value="/getallnotifications",method=RequestMethod.GET)
 public ResponseEntity<?> getAllNotifications(HttpSession session){//get email id of the loggedin user
