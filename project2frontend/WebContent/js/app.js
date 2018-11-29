@@ -5,7 +5,7 @@ var app=angular.module("app",['ngRoute','ngCookies'])
 
 app.config(function($routeProvider){
 	$routeProvider
-	.when('/registration',{controller:'UserCtrl',templateUrl:'views/registrationform.html'})
+	.when('/registration',{controller:'UserCtrl',templateUrl:'views/registration.html'})
 	.when('/login',{controller:'UserCtrl',templateUrl:'views/login.html'})
 	.when('/home',{controller:'NotificationCtrl',templateUrl:'views/home.html'})
 	.when('/addjob',{controller:'JobCtrl',templateUrl:'views/jobform.html'})
