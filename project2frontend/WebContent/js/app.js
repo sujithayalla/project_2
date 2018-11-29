@@ -41,7 +41,7 @@ app.run(function($cookieStore,$rootScope,UserService,$location){
 			  if(response.status==401)//UNAUTHORIZED
 				  $location.path('/login')
 		  })
-		}
+	}
 	
 			
 		
